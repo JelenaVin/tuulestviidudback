@@ -1,9 +1,6 @@
 package ee.valiit.tuulestviidudback.persistance.county;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -18,7 +15,7 @@ import java.math.BigDecimal;
 @Table(name = "county", schema = "tuulest")
 public class County {
     @Id
-    @ColumnDefault("nextval('tuulest.county_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

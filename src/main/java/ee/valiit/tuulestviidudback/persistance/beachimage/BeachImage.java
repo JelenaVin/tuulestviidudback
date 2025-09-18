@@ -13,7 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "beach_image", schema = "tuulest")
 public class BeachImage {
     @Id
-    @ColumnDefault("nextval('tuulest.beach_image_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

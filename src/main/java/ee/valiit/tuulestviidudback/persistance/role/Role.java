@@ -1,9 +1,6 @@
 package ee.valiit.tuulestviidudback.persistance.role;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -16,7 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "role", schema = "tuulest")
 public class Role {
     @Id
-    @ColumnDefault("nextval('tuulest.role_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
