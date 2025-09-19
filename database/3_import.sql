@@ -5,3 +5,11 @@ INSERT INTO tuulest.county (id, name, sequence, lat, lng, zoom_level) VALUES (de
 INSERT INTO tuulest.county (id, name, sequence, lat, lng, zoom_level) VALUES (default, 'Lääne-Viru maakond', 500, 59.4183856, 26.3430591, 9);
 INSERT INTO tuulest.county (id, name, sequence, lat, lng, zoom_level) VALUES (default, 'Pärnu maakond', 600, 58.3881517, 24.4890331, 9);
 INSERT INTO tuulest.county (id, name, sequence, lat, lng, zoom_level) VALUES (default, 'Saare maakond', 700, 58.4149387, 22.6112131, 9);
+
+INSERT INTO tuulest.role (id, name) VALUES (1, 'admin');
+INSERT INTO tuulest.role (id, name) VALUES (2, 'customer');
+
+INSERT INTO tuulest."user" (id, role_id, username, password, status) VALUES (1, 1, 'admin', '123', 'A');
+INSERT INTO tuulest."user" (id, role_id, username, password, status) VALUES (2, 2, 'customer', '123', 'A');
+
+
