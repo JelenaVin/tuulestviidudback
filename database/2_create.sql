@@ -51,9 +51,9 @@ CREATE TABLE config (
 CREATE TABLE county (
     id serial  NOT NULL,
     name varchar(255)  NOT NULL,
-    sequnce int  NOT NULL,
+    sequence int  NOT NULL,
     lat decimal(10,7)  NOT NULL,
-    long decimal(10,7)  NOT NULL,
+    lng decimal(10,7)  NOT NULL,
     zoom_level int  NOT NULL,
     CONSTRAINT county_pk PRIMARY KEY (id)
 );
@@ -133,96 +133,96 @@ CREATE TABLE weather (
 -- Reference: beach_county (table: beach)
 ALTER TABLE beach ADD CONSTRAINT beach_county
     FOREIGN KEY (county_id)
-    REFERENCES county (id)  
-    NOT DEFERRABLE 
+    REFERENCES county (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: beach_image_beach (table: beach_image)
 ALTER TABLE beach_image ADD CONSTRAINT beach_image_beach
     FOREIGN KEY (beach_id)
-    REFERENCES beach (id)  
-    NOT DEFERRABLE 
+    REFERENCES beach (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: beach_user (table: beach)
 ALTER TABLE beach ADD CONSTRAINT beach_user
     FOREIGN KEY (user_id)
-    REFERENCES "user" (id)  
-    NOT DEFERRABLE 
+    REFERENCES "user" (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: comment_beach (table: comment)
 ALTER TABLE comment ADD CONSTRAINT comment_beach
     FOREIGN KEY (beach_id)
-    REFERENCES beach (id)  
-    NOT DEFERRABLE 
+    REFERENCES beach (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: comment_user (table: comment)
 ALTER TABLE comment ADD CONSTRAINT comment_user
     FOREIGN KEY (user_id)
-    REFERENCES "user" (id)  
-    NOT DEFERRABLE 
+    REFERENCES "user" (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: paid_report_beach (table: paid_report)
 ALTER TABLE paid_report ADD CONSTRAINT paid_report_beach
     FOREIGN KEY (beach_id)
-    REFERENCES beach (id)  
-    NOT DEFERRABLE 
+    REFERENCES beach (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: profile_user (table: profile)
 ALTER TABLE profile ADD CONSTRAINT profile_user
     FOREIGN KEY (user_id)
-    REFERENCES "user" (id)  
-    NOT DEFERRABLE 
+    REFERENCES "user" (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: subscription_beach_user (table: paid_report)
 ALTER TABLE paid_report ADD CONSTRAINT subscription_beach_user
     FOREIGN KEY (user_id)
-    REFERENCES "user" (id)  
-    NOT DEFERRABLE 
+    REFERENCES "user" (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: subscription_user (table: subscription)
 ALTER TABLE subscription ADD CONSTRAINT subscription_user
     FOREIGN KEY (user_id)
-    REFERENCES "user" (id)  
-    NOT DEFERRABLE 
+    REFERENCES "user" (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: user_beach_image_user (table: user_beach_image)
 ALTER TABLE user_beach_image ADD CONSTRAINT user_beach_image_user
     FOREIGN KEY (user_id)
-    REFERENCES "user" (id)  
-    NOT DEFERRABLE 
+    REFERENCES "user" (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: user_role (table: user)
 ALTER TABLE "user" ADD CONSTRAINT user_role
     FOREIGN KEY (role_id)
-    REFERENCES role (id)  
-    NOT DEFERRABLE 
+    REFERENCES role (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: weather_beach (table: weather)
 ALTER TABLE weather ADD CONSTRAINT weather_beach
     FOREIGN KEY (beach_id)
-    REFERENCES beach (id)  
-    NOT DEFERRABLE 
+    REFERENCES beach (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 

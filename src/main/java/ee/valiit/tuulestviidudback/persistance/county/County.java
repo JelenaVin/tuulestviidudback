@@ -25,16 +25,16 @@ public class County {
     private String name;
 
     @NotNull
-    @Column(name = "sequnce", nullable = false)
-    private Integer sequnce;
+    @Column(name = "sequence", nullable = false)
+    private Integer sequence;
 
     @NotNull
     @Column(name = "lat", nullable = false, precision = 10, scale = 7)
     private BigDecimal lat;
 
     @NotNull
-    @Column(name = "long", nullable = false, precision = 10, scale = 7)
-    private BigDecimal longField;
+    @Column(name = "lng", nullable = false, precision = 10, scale = 7)
+    private BigDecimal lng;
 
     @NotNull
     @Column(name = "zoom_level", nullable = false)
