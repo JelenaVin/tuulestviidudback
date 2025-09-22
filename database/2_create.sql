@@ -10,14 +10,14 @@ CREATE TABLE beach (
     name varchar(255)  NOT NULL,
     description varchar(1000)  NULL,
     lat decimal(10,7)  NOT NULL,
-    long decimal(10,7)  NOT NULL,
+    lng decimal(10,7)  NOT NULL,
     wind_direction_min int  NOT NULL,
     wind_direction_max int  NOT NULL,
     wind_speed_min decimal(4,1)  NOT NULL,
     wind_speed_max decimal(4,1)  NOT NULL,
     beach_status varchar(3)  NOT NULL,
-    surf_status varchar(10)  NOT NULL,
-    last_update timestamp  NOT NULL,
+    surf_status varchar(10) NULL,
+    last_update timestamp  NULL,
     CONSTRAINT beach_pk PRIMARY KEY (id)
 );
 

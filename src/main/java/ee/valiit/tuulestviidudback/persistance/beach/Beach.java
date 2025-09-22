@@ -7,10 +7,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -46,8 +46,8 @@ public class Beach {
     private BigDecimal lat;
 
     @NotNull
-    @Column(name = "long", nullable = false, precision = 10, scale = 7)
-    private BigDecimal longField;
+    @Column(name = "lng", nullable = false, precision = 10, scale = 7)
+    private BigDecimal lng;
 
     @NotNull
     @Column(name = "wind_direction_min", nullable = false)
@@ -71,12 +71,12 @@ public class Beach {
     private String beachStatus;
 
     @Size(max = 10)
-    @NotNull
-    @Column(name = "surf_status", nullable = false, length = 10)
+    @Column(name = "surf_status", length = 10)
     private String surfStatus;
 
-    @NotNull
-    @Column(name = "last_update", nullable = false)
+    @Column(name = "last_update")
     private Instant lastUpdate;
 
 }
+
+
