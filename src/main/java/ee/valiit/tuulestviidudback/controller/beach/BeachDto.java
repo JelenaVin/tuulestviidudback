@@ -46,4 +46,7 @@ public class BeachDto implements Serializable {
     private BigDecimal windSpeedMin;
     @NotNull
     private BigDecimal windSpeedMax;
+
+    private String imageData;
+
 }

@@ -21,4 +21,6 @@ public class BeachController {
         beachService.addBeach(beachDto);
     }
 
+
+
 }
