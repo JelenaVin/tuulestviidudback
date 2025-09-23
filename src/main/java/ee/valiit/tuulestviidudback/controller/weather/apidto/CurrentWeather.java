@@ -3,10 +3,9 @@ package ee.valiit.tuulestviidudback.controller.weather.apidto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+
 @Data
 public class CurrentWeather {
-    private String time;
-    private int interval;
 
     @JsonProperty("wind_speed_10m")
     private double windSpeed10m;

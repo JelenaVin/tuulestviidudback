@@ -17,7 +17,7 @@ import java.time.Instant;
 @Table(name = "weather", schema = "tuulest")
 public class Weather {
     @Id
-    @ColumnDefault("nextval('tuulest.weather_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
