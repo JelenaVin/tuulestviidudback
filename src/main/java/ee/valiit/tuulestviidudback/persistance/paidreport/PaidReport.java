@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 
@@ -31,9 +30,9 @@ public class PaidReport {
     @JoinColumn(name = "beach_id", nullable = false)
     private Beach beach;
 
-    @Size(max = 10)
+    @Size(max = 1)
     @NotNull
-    @Column(name = "surf_status", nullable = false, length = 10)
+    @Column(name = "surf_status", nullable = false, length = 1)
     private String surfStatus;
 
     @NotNull

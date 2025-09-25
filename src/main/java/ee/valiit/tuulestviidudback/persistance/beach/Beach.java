@@ -10,7 +10,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -58,20 +57,20 @@ public class Beach {
     private Integer windDirectionMax;
 
     @NotNull
-    @Column(name = "wind_speed_min", nullable = false, precision = 4, scale = 1)
-    private BigDecimal windSpeedMin;
+    @Column(name = "wind_speed_min", nullable = false)
+    private Integer windSpeedMin;
 
     @NotNull
-    @Column(name = "wind_speed_max", nullable = false, precision = 4, scale = 1)
-    private BigDecimal windSpeedMax;
+    @Column(name = "wind_speed_max", nullable = false)
+    private Integer windSpeedMax;
 
-    @Size(max = 3)
+    @Size(max = 1)
     @NotNull
-    @Column(name = "beach_status", nullable = false, length = 3)
+    @Column(name = "beach_status", nullable = false, length = 1)
     private String beachStatus;
 
-    @Size(max = 10)
-    @Column(name = "surf_status", length = 10)
+    @Size(max = 1)
+    @Column(name = "surf_status", length = 1)
     private String surfStatus;
 
     @Column(name = "last_update")

@@ -13,10 +13,10 @@ CREATE TABLE beach (
     lng decimal(10,7)  NOT NULL,
     wind_direction_min int  NOT NULL,
     wind_direction_max int  NOT NULL,
-    wind_speed_min decimal(4,1)  NOT NULL,
-    wind_speed_max decimal(4,1)  NOT NULL,
-    beach_status varchar(3)  NOT NULL,
-    surf_status varchar(10) NULL,
+    wind_speed_min int  NOT NULL,
+    wind_speed_max int  NOT NULL,
+    beach_status varchar(1)  NOT NULL,
+    surf_status varchar(1) NULL,
     last_update timestamp  NULL,
     CONSTRAINT beach_pk PRIMARY KEY (id)
 );
@@ -42,9 +42,17 @@ CREATE TABLE comment (
 -- Table: config
 CREATE TABLE config (
     id serial  NOT NULL,
-    wind_speed_min decimal(4,1)  NOT NULL,
-    wind_speed_max decimal(4,1)  NOT NULL,
+    wind_speed_min int  NOT NULL,
+    wind_speed_max int  NOT NULL,
     CONSTRAINT config_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE surf_status (
+    id serial  NOT NULL,
+    code varchar(1)  NOT NULL,
+    wind_speed_min int  NOT NULL,
+    wind_speed_max int  NOT NULL,
+    CONSTRAINT surf_status_pk PRIMARY KEY (id)
 );
 
 -- Table: county
@@ -63,7 +71,7 @@ CREATE TABLE paid_report (
     id serial  NOT NULL,
     user_id int  NOT NULL,
     beach_id int  NOT NULL,
-    surf_status varchar(10)  NOT NULL,
+    surf_status varchar(1)  NOT NULL,
     last_update timestamp  NOT NULL,
     CONSTRAINT paid_report_pk PRIMARY KEY (id)
 );
@@ -114,8 +122,8 @@ CREATE TABLE user_beach_image (
     CONSTRAINT user_beach_image_pk PRIMARY KEY (id)
 );
 
--- Table: weather
-CREATE TABLE weather (
+-- Table: weather_info
+CREATE TABLE weather_info (
     id serial  NOT NULL,
     beach_id int  NOT NULL,
     wind_speed decimal(4,1)  NOT NULL,
@@ -124,8 +132,8 @@ CREATE TABLE weather (
     temperature decimal(4,1)  NOT NULL,
     precipitation decimal(4,1)  NOT NULL,
     timestamp timestamp  NOT NULL,
-    surf_status varchar(10)  NOT NULL,
-    type varchar(4)  NOT NULL,
+    surf_status varchar(1)  NOT NULL,
+    type varchar(1)  NOT NULL,
     CONSTRAINT weather_pk PRIMARY KEY (id)
 );
 
@@ -218,8 +226,8 @@ ALTER TABLE "user" ADD CONSTRAINT user_role
     INITIALLY IMMEDIATE
 ;
 
--- Reference: weather_beach (table: weather)
-ALTER TABLE weather ADD CONSTRAINT weather_beach
+-- Reference: weather_beach (table: weather_info)
+ALTER TABLE weather_info ADD CONSTRAINT weather_beach
     FOREIGN KEY (beach_id)
     REFERENCES beach (id)
     NOT DEFERRABLE

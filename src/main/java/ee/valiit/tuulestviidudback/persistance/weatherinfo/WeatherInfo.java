@@ -1,4 +1,4 @@
-package ee.valiit.tuulestviidudback.persistance.weather;
+package ee.valiit.tuulestviidudback.persistance.weatherinfo;
 
 import ee.valiit.tuulestviidudback.persistance.beach.Beach;
 import jakarta.persistence.*;
@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -14,8 +13,8 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "weather", schema = "tuulest")
-public class Weather {
+@Table(name = "weather_info", schema = "tuulest")
+public class WeatherInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -50,14 +49,14 @@ public class Weather {
     @Column(name = "\"timestamp\"", nullable = false)
     private Instant timestamp;
 
-    @Size(max = 10)
+    @Size(max = 1)
     @NotNull
-    @Column(name = "surf_status", nullable = false, length = 10)
+    @Column(name = "surf_status", nullable = false, length = 1)
     private String surfStatus;
 
-    @Size(max = 4)
+    @Size(max = 1)
     @NotNull
-    @Column(name = "type", nullable = false, length = 4)
+    @Column(name = "type", nullable = false, length = 1)
     private String type;
 
 }
