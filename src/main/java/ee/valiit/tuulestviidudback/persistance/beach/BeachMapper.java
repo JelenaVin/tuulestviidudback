@@ -1,5 +1,6 @@
 package ee.valiit.tuulestviidudback.persistance.beach;
 
+import ee.valiit.tuulestviidudback.Status;
 import ee.valiit.tuulestviidudback.controller.beach.BeachDto;
 import org.mapstruct.*;
 
@@ -17,7 +18,7 @@ public interface BeachMapper {
     @Mapping(source = "windSpeedMin", target = "windSpeedMin")
     @Mapping(source = "windSpeedMax", target = "windSpeedMax")
     @Mapping(source = "description", target = "description")
-    @Mapping(constant = "A", target = "beachStatus")
+    @Mapping(constant = "java(Status.ACTIVE.getCode())", target = "beachStatus")
     @Mapping(expression = "java(Instant.now())", target = "lastUpdate")
     Beach toBeach (BeachDto beachDto);
 
@@ -31,4 +32,7 @@ public interface BeachMapper {
     @Mapping(source = "description", target = "description")
     BeachDto toBeachDto(Beach beach);
 
+    @InheritConfiguration(name = "toBeach")
+    @Mapping(ignore = true, target = "beachStatus")
+    Beach partialUpdate(@MappingTarget Beach beach, BeachDto beachDto);
 }

@@ -16,10 +16,14 @@ import ee.valiit.tuulestviidudback.util.ByteConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class BeachService {
 
+    public static final String FIELS_NAME_BEACH_ID = "beachId";
+    public static final String FIELD_NAME_COUNTY_ID = "countyId";
     private final BeachMapper beachMapper;
     private final CountyRepository countyRepository;
     private final BeachRepository beachRepository;
@@ -37,17 +41,53 @@ public class BeachService {
         beach.setCounty(county);
         beachRepository.save(beach);
         handleAddImageData(beachDto.getImageData(), beach);
+    }
 
-        // todo: kas dtos pn pilt???
-        // todo: kui jah siis on vaja lisada pilt tabelisse 'beach_image'
-        // todo: sellist pilti saab lisada beachRepository abil
-        // todo: Selleks et saaks lisada uut rida on meil vaja UUT BeachImage objekti
-        // todo: Objekte saame teha mugavalt teha mapperi abil?
-        // todo: Aga tuleks siis vaadata, et kas see on mõistilik
-        // todo: Selleks tasub vaadata nii dto klassi kui entity klass
-        // todo: Kui dto pealt saab vaid võtta ühe välja ja täita entity obkjektil üks väli,
-        //  siis vist pole mõtet seda beachImage objekti luua mapperi abil
-        // todo: Seega on mõistlike see objekt ise käsitsi luua new võtmesõna abil
+    public void updateBeach(Integer beachId, BeachDto beachDto) {
+        Beach  beach = handleBeachUpdate(beachId, beachDto);
+        handleBeachImageUpdate(beachDto, beach);
+    }
+
+    private void handleBeachImageUpdate(BeachDto beachDto, Beach beach) {
+        Optional<BeachImage> optionalBeachImage = beachImageRepository.findBeachImageBy(beach.getId());
+        if(imageUpdateIsRequired(beachDto, optionalBeachImage)) {
+            updateAndSaveBeachImage(beachDto, optionalBeachImage);
+        }else if (imageDeleteIsRequired(beachDto, optionalBeachImage)){
+            beachImageRepository.delete(optionalBeachImage.get());
+
+        }
+    }
+
+    private boolean imageDeleteIsRequired(BeachDto beachDto, Optional<BeachImage> optionalBeachImage) {
+        return imageExists(beachDto.getImageData()) && !optionalBeachImage.isPresent();
+    }
+
+    private void updateAndSaveBeachImage(BeachDto beachDto, Optional<BeachImage> optionalBeachImage) {
+        optionalBeachImage.get().setImageData(ByteConverter.stringToBytes(beachDto.getImageData()));
+        beachImageRepository.save(optionalBeachImage.get());
+    }
+
+    private static boolean imageUpdateIsRequired(BeachDto beachDto, Optional<BeachImage> optionalBeachImage) {
+        return imageExists(beachDto.getImageData()) && optionalBeachImage.isPresent();
+    }
+
+    private static boolean imageExists(String imageData) {
+        return !imageData.isEmpty();
+    }
+
+    private Beach handleBeachUpdate(Integer beachId, BeachDto beachDto) {
+        County county = getValidCounty(beachDto.getCountyId());
+
+        Beach beach = getValidBeach(beachId);
+        beachMapper.partialUpdate(beach, beachDto);
+        beach.setCounty(county);
+        beachRepository.save(beach);
+        return null;
+    }
+
+    private Beach getValidBeach(Integer beachId) {
+        return beachRepository.findById(beachId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException(FIELS_NAME_BEACH_ID, beachId));
     }
 
     private void handleAddImageData(String imageData, Beach beach) {
@@ -67,6 +107,6 @@ public class BeachService {
 
     public County getValidCounty(Integer countyId) {
         return countyRepository.findById(countyId)
-                .orElseThrow(() -> new PrimaryKeyNotFoundException("countyId", countyId));
+                .orElseThrow(() -> new PrimaryKeyNotFoundException(FIELD_NAME_COUNTY_ID, countyId));
     }
 }
