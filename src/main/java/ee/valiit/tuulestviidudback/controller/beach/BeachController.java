@@ -22,7 +22,8 @@ public class BeachController {
     @PutMapping("/admin/beach")
     @Operation(summary = "Muudab olemasoleva ranna andmeid (kirjutab üle).",
             description = "imageData ja description pole kohustuslikud väljad")
-    public void updateBeach(@RequestParam Integer beachId, @RequestBody BeachDto beachDto) {
+    public void updateBeach(@RequestParam Integer beachId, @RequestBody @Valid BeachDto beachDto) {
+        beachService.updateBeach(beachId,beachDto);
     }
 
 
