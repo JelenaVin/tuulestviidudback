@@ -49,4 +49,9 @@ public class BeachDto implements Serializable {
 
     private String imageData;
 
+    private String beachStatus;;
+
+    private String surfStatus;
+
+
 }

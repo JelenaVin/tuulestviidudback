@@ -1,5 +1,6 @@
 package ee.valiit.tuulestviidudback.service;
 
+import ee.valiit.tuulestviidudback.Status;
 import ee.valiit.tuulestviidudback.controller.beach.BeachDto;
 import ee.valiit.tuulestviidudback.infrastructure.exception.ForbiddenException;
 import ee.valiit.tuulestviidudback.infrastructure.exception.PrimaryKeyNotFoundException;
@@ -17,6 +18,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -129,5 +131,16 @@ public class BeachService {
     public County getValidCounty(Integer countyId) {
         return countyRepository.findById(countyId)
                 .orElseThrow(() -> new PrimaryKeyNotFoundException(FIELD_NAME_COUNTY_ID, countyId));
+    }
+
+    public void deactivateBeach(Integer beachId) {
+        Beach beach = getValidBeach(beachId);
+        beach.setBeachStatus(Status.DELETED.getCode());
+        beachRepository.save(beach);
+    }
+
+    public List<BeachDto> findBeaches() {
+        List<Beach> beaches = beachRepository.findAll();
+        return beachMapper.toBeachDtos(beaches);
     }
 }

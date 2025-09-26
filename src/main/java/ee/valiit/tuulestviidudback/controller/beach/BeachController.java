@@ -1,17 +1,25 @@
 package ee.valiit.tuulestviidudback.controller.beach;
 
 
+import ee.valiit.tuulestviidudback.controller.county.CountyDto;
 import ee.valiit.tuulestviidudback.service.BeachService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class BeachController {
 
     private final BeachService beachService;
+
+    @GetMapping("/beaches")
+    @Operation(summary = "")
+    public List<BeachDto> findBeaches () { return beachService.findBeaches();
+    }
 
     @PostMapping("/admin/beach")
     @Operation(summary = "Uue ranna lisamine", description = "imageData ja description väljad pole kohustuslikud")
@@ -24,6 +32,11 @@ public class BeachController {
             description = "imageData ja description pole kohustuslikud väljad")
     public void updateBeach(@RequestParam Integer beachId, @RequestBody @Valid BeachDto beachDto) {
         beachService.updateBeach(beachId,beachDto);
+    }
+
+    @DeleteMapping("/admin/beach")
+    public void deactivateLocation(@RequestParam Integer beachId) {
+        beachService.deactivateBeach(beachId);
     }
 
 

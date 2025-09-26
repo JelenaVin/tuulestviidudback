@@ -1,6 +1,7 @@
 package ee.valiit.tuulestviidudback.service;
 
 
+import ee.valiit.tuulestviidudback.Status;
 import ee.valiit.tuulestviidudback.controller.login.LoginResponse;
 import ee.valiit.tuulestviidudback.infrastructure.exception.ForbiddenException;
 import ee.valiit.tuulestviidudback.persistance.user.User;
@@ -20,7 +21,7 @@ public class LoginService {
     private final UserRepository userRepository;
 
     public LoginResponse login(String username, String password) {
-        User user = userRepository.findUserBy(username, password)
+        User user = userRepository.findUserBy(username, password, Status.ACTIVE.getCode())
                 .orElseThrow(() -> new ForbiddenException("Vale kasutajanimi või parool",111));
         return userMapper.toLoginResponse(user);
     }
