@@ -1,4 +1,4 @@
-package ee.valiit.tuulestviidudback.controller.beach;
+package ee.valiit.tuulestviidudback.controller.beach.dto;
 
 import ee.valiit.tuulestviidudback.persistance.beach.Beach;
 import jakarta.validation.constraints.Min;

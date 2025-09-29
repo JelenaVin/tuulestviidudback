@@ -1,7 +1,8 @@
 package ee.valiit.tuulestviidudback.controller.beach;
 
 
-import ee.valiit.tuulestviidudback.controller.county.CountyDto;
+import ee.valiit.tuulestviidudback.controller.beach.dto.BeachDto;
+import ee.valiit.tuulestviidudback.controller.beach.dto.BeachInfo;
 import ee.valiit.tuulestviidudback.service.BeachService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -18,7 +19,8 @@ public class BeachController {
 
     @GetMapping("/beaches")
     @Operation(summary = "")
-    public List<BeachDto> findBeaches () { return beachService.findBeaches();
+    public List<BeachInfo> findBeaches() {
+        return beachService.findBeaches();
     }
 
     @PostMapping("/admin/beach")
@@ -31,14 +33,13 @@ public class BeachController {
     @Operation(summary = "Muudab olemasoleva ranna andmeid (kirjutab üle).",
             description = "imageData ja description pole kohustuslikud väljad")
     public void updateBeach(@RequestParam Integer beachId, @RequestBody @Valid BeachDto beachDto) {
-        beachService.updateBeach(beachId,beachDto);
+        beachService.updateBeach(beachId, beachDto);
     }
 
     @DeleteMapping("/admin/beach")
     public void deactivateLocation(@RequestParam Integer beachId) {
         beachService.deactivateBeach(beachId);
     }
-
 
 
 }

@@ -127,11 +127,12 @@ CREATE TABLE weather_info (
     id serial  NOT NULL,
     beach_id int  NOT NULL,
     wind_speed decimal(4,1)  NOT NULL,
-    wind_direction int  NOT NULL,
+    wind_direction_from int  NOT NULL,
     wind_gusts decimal(4,1)  NOT NULL,
     temperature decimal(4,1)  NOT NULL,
     precipitation decimal(4,1)  NOT NULL,
     timestamp timestamp  NOT NULL,
+    map_wind_direction int  NOT NULL,
     surf_status varchar(1)  NOT NULL,
     type varchar(1)  NOT NULL,
     CONSTRAINT weather_pk PRIMARY KEY (id)
