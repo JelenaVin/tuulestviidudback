@@ -20,6 +20,7 @@ public interface WeatherInfoMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "beach.id", target = "beachId")
     @Mapping(source = "windSpeed", target = "windSpeed")
+    @Mapping(source = "windDirection", target = "windDirection")
     @Mapping(source = "windGusts", target = "windGusts")
     @Mapping(source = "temperature", target = "temperature")
     @Mapping(source = "precipitation", target = "precipitation")
@@ -28,6 +29,14 @@ public interface WeatherInfoMapper {
     @Mapping(source = "type", target = "type")
     WeatherDto toWeatherDto(WeatherInfo weatherInfo);
     List<WeatherDto> toWeatherDtos(List<WeatherInfo> weathers);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "beach.id", target = "beachId")
+    @Mapping(source = "windSpeed", target = "windSpeed")
+    @Mapping(source = "windDirection", target = "windDirection")
+    @Mapping(source = "type", target = "type")
+    MapWeather toMapWeather (WeatherInfo weatherInfo);
+    List<MapWeather> toMapWeathers(List<WeatherInfo> weathers);
 
 
 }

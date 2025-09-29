@@ -1,5 +1,6 @@
 package ee.valiit.tuulestviidudback.controller.weather;
 
+import ee.valiit.tuulestviidudback.persistance.weatherinfo.MapWeather;
 import ee.valiit.tuulestviidudback.service.WeatherService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,14 @@ public class WeatherController {
 
     @GetMapping("/weathers")
     @Operation(summary = "")
-    public List<WeatherDto> findWeathers () { return weatherService.findWeathers();
+    public List<WeatherDto> findWeathers () {
+        return weatherService.findWeathers();
+    }
+
+    @GetMapping("/map/weathers")
+    @Operation(summary = "Ilmainfo kaardi peal kuvamiseks")
+    public List<MapWeather> findMapWeathers () {
+        return weatherService.findMapWeathers();
     }
 
     @PutMapping("/free-weather-update")

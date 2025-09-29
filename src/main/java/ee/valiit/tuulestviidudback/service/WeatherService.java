@@ -12,6 +12,7 @@ import ee.valiit.tuulestviidudback.persistance.paidreport.PaidReportMapper;
 import ee.valiit.tuulestviidudback.persistance.paidreport.PaidReportRepository;
 import ee.valiit.tuulestviidudback.persistance.user.User;
 import ee.valiit.tuulestviidudback.persistance.user.UserRepository;
+import ee.valiit.tuulestviidudback.persistance.weatherinfo.MapWeather;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfo;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfoMapper;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfoRepository;
@@ -120,5 +121,9 @@ public class WeatherService {
     public List<WeatherDto> findWeathers() {
         List<WeatherInfo> weathers = weatherInfoRepository.findAll();
         return weatherInfoMapper.toWeatherDtos(weathers);
+    }
+    public List<MapWeather> findMapWeathers() {
+        List<WeatherInfo> weathers = weatherInfoRepository.findAll();
+        return weatherInfoMapper.toMapWeathers(weathers);
     }
 }
