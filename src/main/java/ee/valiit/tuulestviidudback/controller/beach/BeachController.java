@@ -1,7 +1,6 @@
 package ee.valiit.tuulestviidudback.controller.beach;
 
 
-import ee.valiit.tuulestviidudback.controller.county.CountyDto;
 import ee.valiit.tuulestviidudback.service.BeachService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -19,6 +18,11 @@ public class BeachController {
     @GetMapping("/beaches")
     @Operation(summary = "")
     public List<BeachDto> findBeaches () { return beachService.findBeaches();
+    }
+    @GetMapping("/beach")
+    @Operation(summary = "")
+    public BeachDto findBeach (@RequestParam Integer beachId) {
+        return  beachService.findBeach(beachId);
     }
 
     @PostMapping("/admin/beach")

@@ -44,7 +44,7 @@ public class BeachService {
         beach.setUser(user);
         beach.setCounty(county);
         beachRepository.save(beach);
-        handleAddImageData(beachDto.getImageData(), beach);
+        handleAddImageData(beachDto.getImageData());
     }
 
     @Transactional
@@ -114,12 +114,20 @@ public class BeachService {
                 .orElseThrow(() -> new PrimaryKeyNotFoundException(FIELD_NAME_BEACH_ID, beachId));
     }
 
-    private void handleAddImageData(String imageData, Beach beach) {
+    private void handleAddImageData(String imageData) {
         if (!imageData.isEmpty()) {
             BeachImage beachImage = new BeachImage();
-            beachImage.setBeach(beach);
             beachImage.setImageData(ByteConverter.stringToBytes(imageData));
             beachImageRepository.save(beachImage);
+        }
+    }
+
+    private void handleAddImageData(Integer beachId, BeachDto beachDto) {
+        Optional<BeachImage> optionalBeachImage = beachImageRepository.findBeachImageBy(beachId);
+        if (optionalBeachImage.isPresent()) {
+            BeachImage beachImage = optionalBeachImage.get();
+            byte[] imageBytes = beachImage.getImageData();
+            beachDto.setImageData(ByteConverter.bytesToString(imageBytes));
         }
     }
 
@@ -143,4 +151,16 @@ public class BeachService {
         List<Beach> beaches = beachRepository.findAll();
         return beachMapper.toBeachDtos(beaches);
     }
+
+    public BeachDto findBeach(Integer beachId) {
+        BeachDto beachDto = getValidBeachDto(beachId);
+        handleAddImageData(beachId, beachDto);
+        return beachDto;
+    }
+
+    private BeachDto getValidBeachDto(Integer beachId) {
+        Beach beach = getValidBeach(beachId);
+        return beachMapper.toBeachDto(beach);
+    }
+
 }
