@@ -96,7 +96,7 @@ CREATE TABLE role (
 
 -- Table: subscription
 CREATE TABLE subscription (
-    id int  NOT NULL,
+    id serial  NOT NULL,
     user_id int  NOT NULL,
     date_from date  NOT NULL,
     date_to date  NOT NULL,
