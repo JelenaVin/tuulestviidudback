@@ -140,8 +140,5 @@ public class BeachService {
         beachRepository.save(beach);
     }
 
-    public List<BeachInfo> findBeaches() {
 
-        return null;
-    }
 }

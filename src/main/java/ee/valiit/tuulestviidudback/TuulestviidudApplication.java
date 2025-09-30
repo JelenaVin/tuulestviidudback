@@ -8,9 +8,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class TuulestviidudApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TuulestviidudApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TuulestviidudApplication.class, args);
+    }
 
 }
 

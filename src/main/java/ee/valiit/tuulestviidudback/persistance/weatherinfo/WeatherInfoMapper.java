@@ -1,6 +1,6 @@
 package ee.valiit.tuulestviidudback.persistance.weatherinfo;
 
-import ee.valiit.tuulestviidudback.controller.weather.WeatherDto;
+import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeather;
 import ee.valiit.tuulestviidudback.controller.weather.apidto.WeatherReport;
 import org.mapstruct.*;
 
@@ -17,20 +17,23 @@ public interface WeatherInfoMapper {
     @Mapping(source = "current.temperature2m", target = "temperature")
     WeatherInfo toWeatherInfo(WeatherReport weatherReport);
 
-
-    @Mapping(source = "id", target = "id")
+//
+//    private Integer beachId;
+//    private String beachName;
+//    private BigDecimal lat;
+//    private BigDecimal lng;
+//    private Integer actualDirection;
+//    private String surfStatus;
+//
     @Mapping(source = "beach.id", target = "beachId")
-    @Mapping(source = "windSpeed", target = "windSpeed")
-    @Mapping(source = "mapWindDirection", target = "windDirection")
-    @Mapping(source = "windGusts", target = "windGusts")
-    @Mapping(source = "temperature", target = "temperature")
-    @Mapping(source = "precipitation", target = "precipitation")
-    @Mapping(source = "timestamp", target = "timestamp")
+    @Mapping(source = "beach.name", target = "beachName")
+    @Mapping(source = "beach.lat", target = "lat")
+    @Mapping(source = "beach.lng", target = "lng")
+    @Mapping(source = "mapWindDirection", target = "actualDirection")
     @Mapping(source = "surfStatus", target = "surfStatus")
-    @Mapping(source = "type", target = "type")
-    WeatherDto toWeatherDto(WeatherInfo weatherInfo);
+    BeachWeather toWeatherDto(WeatherInfo weatherInfo);
 
-    List<WeatherDto> toWeatherDtos(List<WeatherInfo> weathers);
+    List<BeachWeather> toWeatherDtos(List<WeatherInfo> weathers);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "beach.id", target = "beachId")

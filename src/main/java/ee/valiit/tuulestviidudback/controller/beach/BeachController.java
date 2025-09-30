@@ -17,12 +17,6 @@ public class BeachController {
 
     private final BeachService beachService;
 
-    @GetMapping("/beaches")
-    @Operation(summary = "")
-    public List<BeachInfo> findBeaches() {
-        return beachService.findBeaches();
-    }
-
     @PostMapping("/admin/beach")
     @Operation(summary = "Uue ranna lisamine", description = "imageData ja description väljad pole kohustuslikud")
     public void addBeach(@RequestBody @Valid BeachDto beachDto) {

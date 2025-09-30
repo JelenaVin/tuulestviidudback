@@ -1,33 +1,16 @@
 package ee.valiit.tuulestviidudback.controller.weather;
 
-import ee.valiit.tuulestviidudback.persistance.weatherinfo.MapWeather;
 import ee.valiit.tuulestviidudback.service.WeatherService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class WeatherController {
 
     private final WeatherService weatherService;
-
-    @GetMapping("/weathers")
-    @Operation(summary = "")
-    public List<WeatherDto> findWeathers () {
-        return weatherService.findWeathers();
-    }
-
-    @GetMapping("/map/weathers")
-    @Operation(summary = "Ilmainfo kaardi peal kuvamiseks")
-    public List<MapWeather> findMapWeathers () {
-        return weatherService.findMapWeathers();
-    }
 
     @PutMapping("/free-weather-update")
     @Operation(summary = "Uue ilmainfo lisamine")
@@ -36,7 +19,7 @@ public class WeatherController {
     }
 
     @PutMapping("/paid-weather-update")
-    public void updatePaidWeatherInfo(@RequestParam Integer userId) {
-        weatherService.updatePaidWeatherInfo(userId);
+    public void updatePaidWeatherInfo() {
+        weatherService.updatePaidWeatherInfo();
     }
 }
