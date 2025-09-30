@@ -1,7 +1,6 @@
 package ee.valiit.tuulestviidudback.service;
 
 import ee.valiit.tuulestviidudback.Status;
-import ee.valiit.tuulestviidudback.controller.beach.BeachDto;
 import ee.valiit.tuulestviidudback.controller.weather.WeatherDto;
 import ee.valiit.tuulestviidudback.controller.weather.apidto.WeatherReport;
 import ee.valiit.tuulestviidudback.infrastructure.exception.PrimaryKeyNotFoundException;
@@ -122,6 +121,7 @@ public class WeatherService {
         List<WeatherInfo> weathers = weatherInfoRepository.findAll();
         return weatherInfoMapper.toWeatherDtos(weathers);
     }
+
     public List<MapWeather> findMapWeathers() {
         List<WeatherInfo> weathers = weatherInfoRepository.findAll();
         return weatherInfoMapper.toMapWeathers(weathers);
