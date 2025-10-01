@@ -23,8 +23,18 @@ public interface BeachMapper {
     @Mapping(expression = "java(Instant.now())", target = "lastUpdate")
     Beach toBeach (BeachDto beachDto);
 
-
-
+    @Mapping(source = "user.id", target = "adminUserId")
+    @Mapping(source = "county.id", target = "countyId")
+    @Mapping(source = "name", target = "beachName")
+    @Mapping(source = "description", target = "description")
+    @Mapping(source = "lat", target = "lat")
+    @Mapping(source = "lng", target = "lng")
+    @Mapping(source = "windDirectionMin", target = "windDirectionMin")
+    @Mapping(source = "windDirectionMax", target = "windDirectionMax")
+    @Mapping(source = "windSpeedMin", target = "windSpeedMax")
+    @Mapping(source = "beachStatus", target = "beachStatus")
+    @Mapping(source = "surfStatus", target = "surfStatus")
+    BeachDto toBeachDto(Beach beach);
 
     @InheritConfiguration(name = "toBeach")
     @Mapping(ignore = true, target = "beachStatus")

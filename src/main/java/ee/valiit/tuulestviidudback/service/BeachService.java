@@ -1,7 +1,7 @@
 package ee.valiit.tuulestviidudback.service;
 
 import ee.valiit.tuulestviidudback.Status;
-import ee.valiit.tuulestviidudback.controller.beach.BeachDto;
+import ee.valiit.tuulestviidudback.controller.beach.dto.BeachDto;
 import ee.valiit.tuulestviidudback.infrastructure.exception.ForbiddenException;
 import ee.valiit.tuulestviidudback.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.valiit.tuulestviidudback.persistance.beach.Beach;

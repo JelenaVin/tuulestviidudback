@@ -66,16 +66,6 @@ CREATE TABLE county (
     CONSTRAINT county_pk PRIMARY KEY (id)
 );
 
--- Table: paid_report
-CREATE TABLE paid_report (
-    id serial  NOT NULL,
-    user_id int  NOT NULL,
-    beach_id int  NOT NULL,
-    surf_status varchar(1)  NOT NULL,
-    last_update timestamp  NOT NULL,
-    CONSTRAINT paid_report_pk PRIMARY KEY (id)
-);
-
 -- Table: profile
 CREATE TABLE profile (
     id serial  NOT NULL,
@@ -179,13 +169,6 @@ ALTER TABLE comment ADD CONSTRAINT comment_user
     INITIALLY IMMEDIATE
 ;
 
--- Reference: paid_report_beach (table: paid_report)
-ALTER TABLE paid_report ADD CONSTRAINT paid_report_beach
-    FOREIGN KEY (beach_id)
-    REFERENCES beach (id)
-    NOT DEFERRABLE
-    INITIALLY IMMEDIATE
-;
 
 -- Reference: profile_user (table: profile)
 ALTER TABLE profile ADD CONSTRAINT profile_user
@@ -195,13 +178,7 @@ ALTER TABLE profile ADD CONSTRAINT profile_user
     INITIALLY IMMEDIATE
 ;
 
--- Reference: subscription_beach_user (table: paid_report)
-ALTER TABLE paid_report ADD CONSTRAINT subscription_beach_user
-    FOREIGN KEY (user_id)
-    REFERENCES "user" (id)
-    NOT DEFERRABLE
-    INITIALLY IMMEDIATE
-;
+
 
 -- Reference: subscription_user (table: subscription)
 ALTER TABLE subscription ADD CONSTRAINT subscription_user
