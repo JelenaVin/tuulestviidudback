@@ -25,6 +25,7 @@ public interface WeatherInfoMapper {
 //    private Integer actualDirection;
 //    private String surfStatus;
 //
+    @Mapping(source = "id", target = "weatherInfoId")
     @Mapping(source = "beach.id", target = "beachId")
     @Mapping(source = "beach.name", target = "beachName")
     @Mapping(source = "beach.lat", target = "lat")

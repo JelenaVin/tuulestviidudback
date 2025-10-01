@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BeachDto implements Serializable {
+
     @NotNull
     @Min(1)
     private Integer adminUserId;
@@ -30,9 +31,6 @@ public class BeachDto implements Serializable {
     @Size(max = 255)
     private String beachName;
 
-    @NotNull
-    @Size(max = 1000)
-    private String description;
 
     @NotNull
     private BigDecimal lat;
@@ -49,9 +47,8 @@ public class BeachDto implements Serializable {
 
     private String imageData;
 
-    private String beachStatus;;
-
-    private String surfStatus;
-
+    @NotNull
+    @Size(max = 1000)
+    private String description;
 
 }

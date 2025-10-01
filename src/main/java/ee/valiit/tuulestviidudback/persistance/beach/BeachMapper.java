@@ -32,8 +32,6 @@ public interface BeachMapper {
     @Mapping(source = "windDirectionMin", target = "windDirectionMin")
     @Mapping(source = "windDirectionMax", target = "windDirectionMax")
     @Mapping(source = "windSpeedMin", target = "windSpeedMax")
-    @Mapping(source = "beachStatus", target = "beachStatus")
-    @Mapping(source = "surfStatus", target = "surfStatus")
     BeachDto toBeachDto(Beach beach);
 
     @InheritConfiguration(name = "toBeach")

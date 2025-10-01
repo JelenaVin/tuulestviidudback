@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BeachWeather implements Serializable {
+    private Integer weatherInfoId;
     private Integer beachId;
     private String beachName;
     private BigDecimal lat;
