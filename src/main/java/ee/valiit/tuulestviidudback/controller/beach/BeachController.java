@@ -7,22 +7,16 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class BeachController {
 
     private final BeachService beachService;
 
-    @GetMapping("/beaches")
-    @Operation(summary = "")
-    public List<BeachDto> findBeaches () { return beachService.findBeaches();
-    }
     @GetMapping("/beach")
     @Operation(summary = "")
-    public BeachDto findBeach (@RequestParam Integer beachId) {
-        return  beachService.findBeach(beachId);
+    public ee.valiit.tuulestviidudback.controller.beach.BeachDto findBeach(@RequestParam Integer beachId) {
+        return beachService.findBeach(beachId);
     }
 
     @PostMapping("/admin/beach")
@@ -35,14 +29,13 @@ public class BeachController {
     @Operation(summary = "Muudab olemasoleva ranna andmeid (kirjutab üle).",
             description = "imageData ja description pole kohustuslikud väljad")
     public void updateBeach(@RequestParam Integer beachId, @RequestBody @Valid BeachDto beachDto) {
-        beachService.updateBeach(beachId,beachDto);
+        beachService.updateBeach(beachId, beachDto);
     }
 
     @DeleteMapping("/admin/beach")
     public void deactivateLocation(@RequestParam Integer beachId) {
         beachService.deactivateBeach(beachId);
     }
-
 
 
 }

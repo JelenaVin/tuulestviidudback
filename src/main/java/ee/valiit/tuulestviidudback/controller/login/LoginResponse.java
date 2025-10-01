@@ -14,4 +14,5 @@ import java.io.Serializable;
 public class LoginResponse  {
     private Integer userId;
     private String roleName;
+    private Boolean hasSubscription;
 }

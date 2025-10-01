@@ -18,7 +18,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -44,7 +43,13 @@ public class BeachService {
         beach.setUser(user);
         beach.setCounty(county);
         beachRepository.save(beach);
-        handleAddImageData(beachDto.getImageData());
+        handleAddImageData(beachDto.getImageData(), beach);
+    }
+
+    public BeachDto findBeach(Integer beachId) {
+        BeachDto beachDto = getValidBeachDto(beachId);
+        handleAddImageData(beachId, beachDto);
+        return beachDto;
     }
 
     @Transactional
@@ -114,9 +119,10 @@ public class BeachService {
                 .orElseThrow(() -> new PrimaryKeyNotFoundException(FIELD_NAME_BEACH_ID, beachId));
     }
 
-    private void handleAddImageData(String imageData) {
+    private void handleAddImageData(String imageData, Beach beach) {
         if (!imageData.isEmpty()) {
             BeachImage beachImage = new BeachImage();
+            beachImage.setBeach(beach);
             beachImage.setImageData(ByteConverter.stringToBytes(imageData));
             beachImageRepository.save(beachImage);
         }
@@ -145,17 +151,6 @@ public class BeachService {
         Beach beach = getValidBeach(beachId);
         beach.setBeachStatus(Status.DELETED.getCode());
         beachRepository.save(beach);
-    }
-
-    public List<BeachDto> findBeaches() {
-        List<Beach> beaches = beachRepository.findAll();
-        return beachMapper.toBeachDtos(beaches);
-    }
-
-    public BeachDto findBeach(Integer beachId) {
-        BeachDto beachDto = getValidBeachDto(beachId);
-        handleAddImageData(beachId, beachDto);
-        return beachDto;
     }
 
     private BeachDto getValidBeachDto(Integer beachId) {

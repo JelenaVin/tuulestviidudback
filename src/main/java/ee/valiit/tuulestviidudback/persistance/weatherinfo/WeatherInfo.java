@@ -30,8 +30,8 @@ public class WeatherInfo {
     private BigDecimal windSpeed;
 
     @NotNull
-    @Column(name = "wind_direction", nullable = false)
-    private Integer windDirection;
+    @Column(name = "wind_direction_from", nullable = false)
+    private Integer windDirectionFrom;
 
     @NotNull
     @Column(name = "wind_gusts", nullable = false, precision = 4, scale = 1)
@@ -48,6 +48,10 @@ public class WeatherInfo {
     @NotNull
     @Column(name = "\"timestamp\"", nullable = false)
     private Instant timestamp;
+
+    @NotNull
+    @Column(name = "map_wind_direction", nullable = false)
+    private Integer mapWindDirection;
 
     @Size(max = 1)
     @NotNull

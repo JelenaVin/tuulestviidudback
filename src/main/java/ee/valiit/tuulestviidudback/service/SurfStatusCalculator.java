@@ -19,7 +19,7 @@ public class SurfStatusCalculator {
 
 
     public String calculateSurfStatus(WeatherInfo weatherInfo, Beach beach) {
-        if (windDirectionIsWithinRequirements(weatherInfo.getWindDirection(), beach.getWindDirectionMin(), beach.getWindDirectionMax())) {
+        if (windDirectionIsWithinRequirements(weatherInfo.getWindDirectionFrom(), beach.getWindDirectionMin(), beach.getWindDirectionMax())) {
             return getStatusByWindSpeed(weatherInfo.getWindSpeed(), beach.getWindSpeedMin(), beach.getWindSpeedMax());
         }
         return STATUS_NO_GO;
