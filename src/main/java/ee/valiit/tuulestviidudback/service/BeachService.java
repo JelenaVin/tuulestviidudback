@@ -49,6 +49,7 @@ public class BeachService {
         Beach beach = beachMapper.toBeach(beachDto);
         beach.setUser(user);
         beach.setCounty(county);
+        beach.setBeachStatus(Status.ACTIVE.getCode());
         beachRepository.save(beach);
         handleAddImageData(beachDto.getImageData(), beach);
     }

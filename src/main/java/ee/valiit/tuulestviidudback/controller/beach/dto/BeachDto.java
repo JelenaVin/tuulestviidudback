@@ -47,6 +47,7 @@ public class BeachDto implements Serializable {
 
     private String imageData;
 
+
     @NotNull
     @Size(max = 1000)
     private String description;

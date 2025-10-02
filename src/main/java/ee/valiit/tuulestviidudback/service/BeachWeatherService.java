@@ -3,7 +3,9 @@ package ee.valiit.tuulestviidudback.service;
 import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeather;
 import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeatherInfo;
 import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeatherReport;
+import ee.valiit.tuulestviidudback.persistance.beach.Beach;
 import ee.valiit.tuulestviidudback.persistance.beachimage.BeachImage;
+import ee.valiit.tuulestviidudback.persistance.beachimage.BeachImageRepository;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfo;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfoMapper;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfoRepository;
@@ -25,6 +27,8 @@ public class BeachWeatherService {
     private final WeatherInfoRepository weatherInfoRepository;
 
     private final WeatherService weatherService;
+    private final BeachService beachService;
+    private final BeachImageRepository beachImageRepository;
 
 
     public BeachWeatherReport getFreeBeachWeatherReport() {
@@ -68,9 +72,19 @@ public class BeachWeatherService {
 
 
     public BeachWeatherInfo getBeachWeather(Integer weatherInfoId) {
-        // todo vajab implementeerimist
-        Optional <WeatherInfo> optionalWeatherInfo = weatherInfoRepository.findById(weatherInfoId);
+        Optional<WeatherInfo> optionalWeatherInfo = weatherInfoRepository.findById(weatherInfoId);
         WeatherInfo weatherInfo = optionalWeatherInfo.get();
-        return weatherInfoMapper.toBeachWeatherInfo(weatherInfo);
+        BeachWeatherInfo beachWeatherInfo = weatherInfoMapper.toBeachWeatherInfo(weatherInfo);
+        getBeachImage(weatherInfoId, beachWeatherInfo);
+        return beachWeatherInfo;
+    }
+
+    private void getBeachImage(Integer weatherInfoId, BeachWeatherInfo beachWeatherInfo) {
+        Optional<BeachImage> optionalBeachImage = beachImageRepository.findById(weatherInfoId);
+        if (optionalBeachImage.isPresent()){
+            BeachImage beachImage = optionalBeachImage.get();
+            byte[] imageBytes = beachImage.getImageData();
+            beachWeatherInfo.setBeachImage(ByteConverter.bytesToString(imageBytes));
+        }
     }
 }
