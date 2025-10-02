@@ -2,7 +2,6 @@ package ee.valiit.tuulestviidudback.persistance.beach;
 
 import ee.valiit.tuulestviidudback.controller.beach.dto.BeachDto;
 import ee.valiit.tuulestviidudback.controller.beach.dto.BeachInfo;
-import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeather;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfo;
 import org.mapstruct.*;
 
@@ -23,7 +22,7 @@ public interface BeachMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(constant = "java(Status.ACTIVE.getCode())", target = "beachStatus")
     @Mapping(expression = "java(Instant.now())", target = "lastUpdate")
-    Beach toBeach (BeachDto beachDto);
+    Beach toBeach(BeachDto beachDto);
 
     @Mapping(source = "user.id", target = "adminUserId")
     @Mapping(source = "county.id", target = "countyId")
@@ -33,7 +32,8 @@ public interface BeachMapper {
     @Mapping(source = "lng", target = "lng")
     @Mapping(source = "windDirectionMin", target = "windDirectionMin")
     @Mapping(source = "windDirectionMax", target = "windDirectionMax")
-    @Mapping(source = "windSpeedMin", target = "windSpeedMax")
+    @Mapping(source = "windSpeedMin", target = "windSpeedMin")
+    @Mapping(source = "windSpeedMax", target = "windSpeedMax")
     BeachDto toBeachDto(Beach beach);
 
     @Mapping(source = "beach.id", target = "beachId")
@@ -43,7 +43,8 @@ public interface BeachMapper {
     @Mapping(source = "mapWindDirection", target = "actualDirection")
     @Mapping(source = "surfStatus", target = "surfStatus")
     BeachInfo toBeachInfo(WeatherInfo weatherInfo);
-    List <BeachInfo> toBeachInfos (List <WeatherInfo> weatherInfo);
+
+    List<BeachInfo> toBeachInfos(List<WeatherInfo> weatherInfo);
 
     @InheritConfiguration(name = "toBeach")
     @Mapping(ignore = true, target = "beachStatus")
