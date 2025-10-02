@@ -75,12 +75,13 @@ public class BeachWeatherService {
         Optional<WeatherInfo> optionalWeatherInfo = weatherInfoRepository.findById(weatherInfoId);
         WeatherInfo weatherInfo = optionalWeatherInfo.get();
         BeachWeatherInfo beachWeatherInfo = weatherInfoMapper.toBeachWeatherInfo(weatherInfo);
-        getBeachImage(weatherInfoId, beachWeatherInfo);
+        Integer beachId = weatherInfo.getBeach().getId();
+        getBeachImage(beachId, beachWeatherInfo);
         return beachWeatherInfo;
     }
 
-    private void getBeachImage(Integer weatherInfoId, BeachWeatherInfo beachWeatherInfo) {
-        Optional<BeachImage> optionalBeachImage = beachImageRepository.findById(weatherInfoId);
+    private void getBeachImage(Integer beachId, BeachWeatherInfo beachWeatherInfo) {
+        Optional<BeachImage> optionalBeachImage = beachImageRepository.findByBeachId(beachId);
         if (optionalBeachImage.isPresent()){
             BeachImage beachImage = optionalBeachImage.get();
             byte[] imageBytes = beachImage.getImageData();

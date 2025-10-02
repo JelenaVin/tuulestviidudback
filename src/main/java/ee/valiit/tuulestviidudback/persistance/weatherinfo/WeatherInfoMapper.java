@@ -19,13 +19,6 @@ public interface WeatherInfoMapper {
     @Mapping(source = "current.temperature2m", target = "temperature")
     WeatherInfo toWeatherInfo(WeatherReport weatherReport);
 
-//    rivate Integer beachId;
-//    private String beachName;
-//    private BigDecimal lat;
-//    private BigDecimal lng;
-//    private Integer actualDirection;
-//    private String surfStatus;
-//}
 
     @Mapping(source = "id", target = "weatherInfoId")
     @Mapping(source = "beach.id", target = "beachId")
