@@ -1,10 +1,13 @@
 package ee.valiit.tuulestviidudback.service;
 
 import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeather;
+import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeatherInfo;
 import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeatherReport;
+import ee.valiit.tuulestviidudback.persistance.beachimage.BeachImage;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfo;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfoMapper;
 import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfoRepository;
+import ee.valiit.tuulestviidudback.util.ByteConverter;
 import ee.valiit.tuulestviidudback.util.TimeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -63,8 +67,10 @@ public class BeachWeatherService {
     }
 
 
-
-
-
-
+    public BeachWeatherInfo getBeachWeather(Integer weatherInfoId) {
+        // todo vajab implementeerimist
+        Optional <WeatherInfo> optionalWeatherInfo = weatherInfoRepository.findById(weatherInfoId);
+        WeatherInfo weatherInfo = optionalWeatherInfo.get();
+        return weatherInfoMapper.toBeachWeatherInfo(weatherInfo);
+    }
 }

@@ -2,11 +2,14 @@ package ee.valiit.tuulestviidudback.controller.beach;
 
 
 import ee.valiit.tuulestviidudback.controller.beach.dto.BeachDto;
+import ee.valiit.tuulestviidudback.controller.beach.dto.BeachInfo;
 import ee.valiit.tuulestviidudback.service.BeachService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,10 +17,16 @@ public class BeachController {
 
     private final BeachService beachService;
 
-    @GetMapping("/beach")
+    @GetMapping("/admin/beach")
     @Operation(summary = "")
     public BeachDto findBeach(@RequestParam Integer beachId) {
         return beachService.findBeach(beachId);
+    }
+
+    @GetMapping("/admin/beaches")
+    @Operation(summary = "")
+    public List<BeachInfo> findBeaches() {
+        return beachService.findBeaches();
     }
 
     @PostMapping("/admin/beach")

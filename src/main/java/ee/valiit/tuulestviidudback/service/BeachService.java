@@ -2,6 +2,7 @@ package ee.valiit.tuulestviidudback.service;
 
 import ee.valiit.tuulestviidudback.Status;
 import ee.valiit.tuulestviidudback.controller.beach.dto.BeachDto;
+import ee.valiit.tuulestviidudback.controller.beach.dto.BeachInfo;
 import ee.valiit.tuulestviidudback.infrastructure.exception.ForbiddenException;
 import ee.valiit.tuulestviidudback.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.valiit.tuulestviidudback.persistance.beach.Beach;
@@ -13,11 +14,15 @@ import ee.valiit.tuulestviidudback.persistance.county.County;
 import ee.valiit.tuulestviidudback.persistance.county.CountyRepository;
 import ee.valiit.tuulestviidudback.persistance.user.User;
 import ee.valiit.tuulestviidudback.persistance.user.UserRepository;
+import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfo;
+import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfoMapper;
+import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfoRepository;
 import ee.valiit.tuulestviidudback.util.ByteConverter;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -32,6 +37,8 @@ public class BeachService {
     private final BeachRepository beachRepository;
     private final UserRepository userRepository;
     private final BeachImageRepository beachImageRepository;
+    private final WeatherInfoMapper weatherInfoMapper;
+    private final WeatherInfoRepository weatherInfoRepository;
 
     @Transactional
     public void addBeach(BeachDto beachDto) {
@@ -158,4 +165,9 @@ public class BeachService {
         return beachMapper.toBeachDto(beach);
     }
 
+    public List<BeachInfo> findBeaches() {
+        List<WeatherInfo> beaches = weatherInfoRepository.findAll();
+        // todo vajab implementeerimist
+        return beachMapper. toBeachInfos(beaches);
+    }
 }

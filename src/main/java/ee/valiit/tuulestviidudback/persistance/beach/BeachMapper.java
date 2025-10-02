@@ -2,6 +2,8 @@ package ee.valiit.tuulestviidudback.persistance.beach;
 
 import ee.valiit.tuulestviidudback.controller.beach.dto.BeachDto;
 import ee.valiit.tuulestviidudback.controller.beach.dto.BeachInfo;
+import ee.valiit.tuulestviidudback.controller.beachweather.dto.BeachWeather;
+import ee.valiit.tuulestviidudback.persistance.weatherinfo.WeatherInfo;
 import org.mapstruct.*;
 
 import java.time.Instant;
@@ -33,6 +35,15 @@ public interface BeachMapper {
     @Mapping(source = "windDirectionMax", target = "windDirectionMax")
     @Mapping(source = "windSpeedMin", target = "windSpeedMax")
     BeachDto toBeachDto(Beach beach);
+
+    @Mapping(source = "beach.id", target = "beachId")
+    @Mapping(source = "beach.name", target = "beachName")
+    @Mapping(source = "beach.lat", target = "lat")
+    @Mapping(source = "beach.lng", target = "lng")
+    @Mapping(source = "mapWindDirection", target = "actualDirection")
+    @Mapping(source = "surfStatus", target = "surfStatus")
+    BeachInfo toBeachInfo(WeatherInfo weatherInfo);
+    List <BeachInfo> toBeachInfos (List <WeatherInfo> weatherInfo);
 
     @InheritConfiguration(name = "toBeach")
     @Mapping(ignore = true, target = "beachStatus")
