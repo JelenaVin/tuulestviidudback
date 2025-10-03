@@ -18,13 +18,13 @@ public class BeachController {
     private final BeachService beachService;
 
     @GetMapping("/admin/beach")
-    @Operation(summary = "")
+    @Operation(summary = "Toob ühe konkreetse ranna info")
     public BeachDto findBeach(@RequestParam Integer beachId) {
         return beachService.findBeach(beachId);
     }
 
     @GetMapping("/admin/beaches")
-    @Operation(summary = "")
+    @Operation(summary = "Toob vajalikud ranna andmed beach tabelist kaardil kuvamiseks")
     public List<BeachInfo> findBeaches() {
         return beachService.findBeaches();
     }
@@ -43,6 +43,7 @@ public class BeachController {
     }
 
     @DeleteMapping("/admin/beach")
+    @Operation(summary = "Kustutab olemasoleva ranna andmeid (muudab statuse deaktiveerib)")
     public void deactivateLocation(@RequestParam Integer beachId) {
         beachService.deactivateBeach(beachId);
     }

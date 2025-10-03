@@ -15,6 +15,7 @@ public class BeachWeatherController {
     private final BeachWeatherService beachWeatherService;
 
     @GetMapping("/beach/weather")
+    @Operation(summary = "Toob infot modalis kuvamiseks")
     public BeachWeatherInfo getBeachWeather(@RequestParam Integer weatherInfoId) {
         return beachWeatherService.getBeachWeather(weatherInfoId);
     }

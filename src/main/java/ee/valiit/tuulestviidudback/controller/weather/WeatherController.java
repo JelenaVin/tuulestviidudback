@@ -13,12 +13,13 @@ public class WeatherController {
     private final WeatherService weatherService;
 
     @PutMapping("/free-weather-update")
-    @Operation(summary = "Uue ilmainfo lisamine")
+    @Operation(summary = "Ilmainfo tavakiendile")
     public void updateFreeWeatherInfo() {
         weatherService.updateFreeWeatherInfo();
     }
 
     @PutMapping("/paid-weather-update")
+    @Operation (summary = "Ilmainfo subscriptioniga kliendile")
     public void updatePaidWeatherInfo() {
         weatherService.updatePaidWeatherInfo();
     }
